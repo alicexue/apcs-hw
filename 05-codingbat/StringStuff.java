@@ -1,4 +1,7 @@
 public class StringStuff {
+
+    // homework from 9/23, all working
+
     // nonStart
     public String nonStart(String a, String b) {
 	return (a.substring(1)+b.substring(1));
@@ -17,4 +20,6 @@ public class StringStuff {
 	    return (n-21)*2;
 	}
     }
+
+    // classwork is in Henry's repository
 }
