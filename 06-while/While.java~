@@ -37,7 +37,7 @@ public class While {
 	String result = "";
 	int x = 0;
 	while (x<str.length()) {
-	    if (x+2<str.length() && str.charAt(x)=='y' && str.charAt(x+2)=='k') {
+	    if (x+2<str.length() && str.charAt(x)=='y' && str.charAt(x+1)=='a' && str.charAt(x+2)=='k') {
 		x = x + 3;
 	    } else {
 		result = result + str.charAt(x);
