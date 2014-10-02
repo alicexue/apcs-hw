@@ -52,5 +52,25 @@ public class Shapes {
 	}
 	return s;
     }
-	   
+
+    public String tri3(int h) {
+	int row = 0;
+	String s = "";
+	int c = 0; 
+	int r = 0;
+	while (row<h) {
+	    r = h - row - 1;
+	    while (r>0) {
+		s = s + " ";
+		r = r -1;
+	    }
+	    c = 2*row + 1;
+	    while (c<=2*h-1) {
+		s = s + "*";
+		c = c - 1;
+	    }
+	    row = row + 1;
+	}
+	return s;
+    }
 }
