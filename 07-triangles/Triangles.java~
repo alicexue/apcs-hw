@@ -1,0 +1,47 @@
+public class Triangle
+{
+    public String rightTriangle(int h) 
+    {
+	String s = new String();
+	int height = 0;
+	    while (height < h)
+		{
+		    int row = height + 1;
+		    while (row > 0)
+			{
+			    s = s + "*";
+			}
+		    s = s + "\n";
+		}
+	    return s;
+    }
+    /*
+    public String triangle2 (int h) {
+	String s = new String();
+	int height = h;
+	while (height<=h) {
+	    int x = 1;
+	    while (h - x >0) {
+		s = s + " ";
+		x = x + 1;
+	    }
+	}
+    }
+    */
+    public String triangle2 (int h) {
+	String s = new String();
+	int height = h;
+	while (height>0) {
+	    int star = 1;
+	    s = s + " ";
+	    while (star <= height) {
+		s = s + "*";
+		star ++;
+	    }
+	    s = s + "\n";
+	}
+    }
+	    
+	    
+	    
+}
