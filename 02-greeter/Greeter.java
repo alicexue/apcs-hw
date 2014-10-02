@@ -22,7 +22,7 @@ public class Greeter {
 	greeting = g;
     }
 
-    /* we can overload methos ( including constructors) which means we
+    /* we can overload methods ( including constructors) which means we
        have more than one method with the same name. They just have 
        to have different "signatures" which means different parameter types.
        Java figures our which one to run by matching parameter types
