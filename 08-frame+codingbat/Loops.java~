@@ -1,0 +1,23 @@
+public class Loops {
+    public String line (int r, int c) {
+	s = "";
+	int stars;
+	for (stars=0;stars<r;stars++) {
+	    s = s + "*";
+	}
+	return s
+    }
+    public String frame(int r,int c) {
+	s = line(r,c);
+	int row;
+	int spaces;
+	for (row=0;row<r-2;r++) {
+	    s = s + "*";
+	    for (spaces=0;spaces<c-2;space++) {
+		s = s + " ";
+	    }
+	    s = s + "*\n";
+	}
+	return s;
+    }
+	    
