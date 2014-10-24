@@ -1,0 +1,7 @@
+public class Driver{
+    public static void main (String[] args){
+	arrays a = new arrays();
+	System.out.println(a.frontpiece({1,2,3}));
+	System.out.println(a.frontpiece({1,2}));
+        System.out.println(a.sum13({1,2,2,1}));
+	System.out.println(a.sum13({1,2,2,1,13}));
