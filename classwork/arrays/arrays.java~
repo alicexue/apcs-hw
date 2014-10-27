@@ -1,0 +1,21 @@
+public class arrays {
+    private int[] a;
+
+    public Arraystuff() {
+	a=new int[100];
+    }
+
+    public String toString(){
+	String s = ""+a.length;
+	return s;
+    }
+    
+    public static void main(String[] args) {
+	int[] intArray = new int[100];
+	for (int i=0;i<intArray.length;i++){
+	    Random r = new Random(75);
+	    int[i]=r+75;
+	}
+	return intArray;
+    }
+}
