@@ -1,21 +1,63 @@
+import java.util.*;
+
 public class arrays {
     private int[] a;
-
-    public Arraystuff() {
+    public final int final_example = 123;
+    //final is for a variable that should be constant
+    //can't change the value after the initial assignment
+    
+    //constructor
+    /*
+    public arrays() {
 	a=new int[100];
     }
+    */
+    private Random rnd;
+    
+    public arrays(int n){
+	rnd = new Random();
+	a = new int[n];
+	for (int i=0;i<a.length;i++){
+	    a[i]=75+rnd.nextInt(76);
+	}
+    }
 
-    public String toString(){
-	String s = ""+a.length;
-	return s;
+    public arrays(){
+	this(100);
     }
     
-    public static void main(String[] args) {
-	int[] intArray = new int[100];
-	for (int i=0;i<intArray.length;i++){
-	    Random r = new Random(75);
-	    int[i]=r+75;
+    public String toString(){
+	String s = "";
+	//"" puts it in string context
+	//the next part is invalid since the var is final
+	//final_example = 321;
+	//s = s + final_example;
+	for (int i=0;i<a.length;i++){
+	    s=s+a[i]+", ";
 	}
-	return intArray;
+	return s;
     }
+
+    public static void main(String[] args) {
+	arrays as = new arrays();
+	System.out.println(as);
+    }
+
+    public int find (int value){ //return index of 1st occurence of value
+	int num = -1;
+	for (int i=0;i<a.length;i++) {
+	    if a[i].equals(value){
+		num = i;
+		break;
+	    }
+	}
+	return num;
+    }
+
+
+    public maxVal(){ // largest value
+	max=0
+	for (int i=0;i<a.length;i++) {
+	   
+    
 }
