@@ -1,0 +1,7 @@
+public class Driver {
+    public static void main(String[] args) {
+	arrays a = new arrays();
+	System.out.println(find.53);
+	System.out.println(maxVal);
+    }
+}
