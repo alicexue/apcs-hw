@@ -47,7 +47,7 @@ public class arrays {
 	return max;
     }
 	   
-    public int freq(int i) {
+    public int freq(i) {
 	int count=0;
 	for (int q=0;q<a.length;q++) {
 	    if (a[q]==i) {
