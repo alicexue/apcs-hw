@@ -97,5 +97,35 @@ public class codingbat {
 	return newarray;
     }
 
+    // doesn't work for all cases
+    public int maxMirror(int[] nums) {
+	int count=0;
+	boolean exists=false;
+	int firstpos=0;
+	int lastpos=0;
+	for (int i=0;i<nums.length;i++) {
+	    for (int q=nums.length-1;q>=0;q--) {
+		if (nums[i]==nums[q]) {
+		    exists=true;
+		    firstpos=i;
+		    lastpos=q;
+                    //count=1;
+		    break;
+		}
+	    }
+	    break;
+	}
+    
+	if (exists==true) {
+	    for (firstpos=firstpos+1;firstpos<nums.length;firstpos++) {
+		if (nums[firstpos]==nums[lastpos-1]) {
+		    count++;
+		    lastpos--;
+		}
+            }
+	}
+	return count;
+
+    }
 }
 
