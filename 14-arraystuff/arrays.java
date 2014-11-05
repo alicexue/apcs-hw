@@ -57,4 +57,16 @@ public class arrays {
 	return count;
     }
 
+    //private int[] A;
+
+
+    public int mode(int[] A) {
+	int count=0;
+	for (int i=0;i<A.length;i++) {
+	    if (freq(A[i])>count) {
+		count = freq(A[i]);
+	    }
+	}
+	return count;
+    }
 }

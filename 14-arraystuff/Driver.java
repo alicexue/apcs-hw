@@ -1,3 +1,5 @@
+import java.util.*;
+
 public class Driver {
     public static void main(String[] args) {
 	arrays a = new arrays();
@@ -5,6 +7,21 @@ public class Driver {
 	System.out.println(a.find(100));
 	System.out.println(a.maxVal());
 	System.out.println(a.freq(1));
+	int[] A = new int[100];
+	Random rnd = new Random();
+	for (int i=0;i<A.length;i++) {
+	    A[i]=rnd.nextInt(21);
+	}
+	System.out.println("");
+	String s = "";
+	for (int i=0;i<A.length;i++) {
+	    s=s+A[i]+", ";
+	}
+	System.out.println(s);
+	System.out.println("here is the mode:");
+	System.out.println(a.mode(A));
+
+
 	
 	codingbat b = new codingbat();
 	int[] c = {1,2,2};
