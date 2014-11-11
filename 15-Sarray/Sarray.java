@@ -1,6 +1,6 @@
 public class Sarray{
     private int[] data; // should be object[]
-    private int last;
+    private int last; // location of last item
 
     public Sarray() {
 	// start array at size 10, don't use 0
@@ -8,8 +8,13 @@ public class Sarray{
 	for (int w=0;w<data.length;w++) {
 	    data[w]=9;
 	}
-	last=0;
+	last=data.length-1;
     }
+
+    public void showerror() {
+	throw new ArrayIndexOutOfBoundsException();
+    }
+
     public boolean add (int i) {
 	// add to end
 	int[] newarray=new int[data.length+1];
@@ -18,13 +23,17 @@ public class Sarray{
 	}
 	newarray[data.length]=i;
 	data=newarray;
+	last++;
 	return true;
     }	   
 
     public void add (int index, int i) {
 	// inserts at location index - shift everything else down
+	if (index>data.length-1) {
+	    showerror();
+	} 
 	int[] newarray=new int[data.length+1];
-	for (int a=0;a<data.length;a++) {
+	for (int a=0;a<newarray.length;a++) {
 	    if (a<index) {
 		newarray[a]=data[a];
 	    }
@@ -35,26 +44,27 @@ public class Sarray{
 		newarray[a]=data[a-1];
 	    }
 	}
-	data = newarray;
+        data = newarray;
+        last++;
     }
 
     public int size(){
-	int count=0;
-        for (int a=0;a<data.length;a++) {
-	    if (data[a]!=0) {
-		count++;
-	    } 
-	}
-	return count;
+	return last;
     }
 
     public int get (int index) {
 	// gets the item
+	if (index>data.length-1) {
+	    showerror();
+	}
 	return data[index];
     }
     
     public int set (int index, int i) {
 	// replaces item
+	if (index>data.length-1) {
+	    showerror();
+	} 
 	int oldval=data[index];
 	data[index]=i;
 	return oldval;
@@ -62,13 +72,17 @@ public class Sarray{
     
     public int remove (int index) {
 	// must shift things over
-	int oldval=data[index];
+	if (index>data.length-1) {
+	    showerror();
+	} 
+        int oldval=data[index];
 	for (int a=0;a<data.length-1;a++) {
 	    if (a>=index) {
 		data[a]=data[a+1];
 	    }
 	}
 	data[data.length-1]=0;
+	last--;
 	return oldval;
     }
 
@@ -83,6 +97,7 @@ public class Sarray{
     public static void main (String[] args) {
 	Sarray a = new Sarray();
 	System.out.println(a);
+	System.out.println(a.size());
 	System.out.println(a.add(5));
 	System.out.println(a);
 	a.add(3,7);
@@ -94,6 +109,12 @@ public class Sarray{
 	System.out.println(a);
 	System.out.println(a.remove(3));
 	System.out.println(a);
+	System.out.println(a.size());
+	System.out.println("Testing Errors:");
+	a.add(20,3);
+	a.get(20);
+	a.set(34,2);
+	a.remove(18);
     }
 	
 
