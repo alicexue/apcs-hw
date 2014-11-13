@@ -9,7 +9,6 @@ public class Driver {
 	    al.add(q.nextInt(5)+1);
 	}
 	System.out.println(al);
-	ArrayList<Integer> delete = new ArrayList<Integer>();
 	int prev=al.get(19);
 	for (int i=19;i>0;i--) {
 	    if (al.get(i-1)==prev) {
