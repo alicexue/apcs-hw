@@ -4,30 +4,27 @@ import java.util.*;
 public class Driver {
     public static void main (String[] args) {
 	ArrayList<Integer> al = new ArrayList<Integer>();
-	int[] a = new int[10];
+	int size = 20;
+	int[] a = new int[size];
 	Random r = new Random();
 
-	for (int i=0;i<10;i++) {
+	for (int i=0;i<size;i++) {
 	    al.add(i);
 	    a[i]=i;
 	}
     
 	// randomize ArrayList al
-	int oldval;
-	int replace;
-	for (int i=0;i<10;i++) {
-	    oldval=al.get(i);
-	    replace=r.nextInt(10);
+	for (int i=0;i<size;i++) {
+	    int oldval=al.get(i);
+	    int replace=r.nextInt(al.size());
 	    al.set(i,al.get(replace));
 	    al.set(replace,oldval);
 	}
 
 	// randomize array a
-	int oldval2;
-	int replace2;
-	for (int i=0;i<a.length;i++) {
-	    oldval2=a[i];
-	    replace2=r.nextInt(10);
+	for (int i=0;i<size;i++) {
+	    int oldval2=a[i];
+	    int replace2=r.nextInt(a.length);
 	    a[i]=a[replace2];
 	    a[replace2]=oldval2;
 	}
