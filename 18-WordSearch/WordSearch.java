@@ -111,7 +111,49 @@ public class WordSearch{
 	}
     }
 
+    public void addWordD(String w, int row, int col, boolean left) {
+	int r = checkrow(row);
+	int c = checkcol(w,col);
 
+	checkbounds(w,r,c,r);
+	checkbounds(w,r,c,c);
+
+	for (int i=0;i<w.length();i++) {
+	    board[r][c]=w.charAt(i);
+	    /*
+	    if (left) {
+		r--;
+		c--;
+	    } else {
+		r++;
+		c++;
+		}
+	    */
+	    r--;
+	    c--;
+	}
+    }
+
+    public void addWordDbw(String w, int row, int col, boolean left) {
+	int r = checkrow(row);
+	int c = checkcol(w,col);
+
+	checkbounds(w,r,c,r);
+	checkbounds(w,r,c,c);
+
+	for (int i=w.length()-1;i>=0;i--) {
+	    board[r][c]=w.charAt(i);
+	    if (left) {
+		r--;
+		c--;
+	    } else {
+		r++;
+		c++;
+	    }
+	}
+    }
+
+    
     public static void main(String[] args) {
 	WordSearch w = new WordSearch();
 	w.addWordH("hello",3,0);
@@ -122,6 +164,9 @@ public class WordSearch{
 	w.addWordHbw("backwards",17,15);
 	w.addWordV("hello",7,14);
 	w.addWordVbw("hello",7,14);
+	w.addWordD("hello",6,8,true);
+	w.addWordDbw("hello",15,16,true);
+	//w.addWordD("hello",15,2,false);
 	System.out.println(w);
 	}
 }
