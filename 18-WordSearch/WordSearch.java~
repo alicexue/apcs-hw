@@ -2,6 +2,9 @@
  * Creates a word search puzzle
  *
  */
+import java.io.*;
+import java.util.*;
+
 public class WordSearch{
 
     private char[][] board;
@@ -12,9 +15,9 @@ public class WordSearch{
 	    for (int j = 0; j < board[i].length; j++) {
 		board[i][j]='.';
 	    }
-	}
-	
+	}	
     }
+
     public WordSearch(){
 	this(20,30);
     }
@@ -30,79 +33,200 @@ public class WordSearch{
 	return s;
     }
     
-    public void addWordH(String w,int row, int col){
-	int r = row, c = col;
-
-	// if the row or col is out of bounds,
-	// will adjust them for the word to be at the last row or col
-	if (r>=20) {
-	    r = 19;
+    public int checkrow(String w, int row) {
+	if (row>=board.length-w.length()) {
+	    row = board.length-w.length();
 	}
+	return row;
+    }
 
-	if (c>=30-w.length()) {
-	    c = 30-w.length();
+    public int checkcol(String w, int col) {
+	if (col>=board[0].length-w.length()) {
+	    col = board[0].length-w.length();
 	}
+	return col;
+    }
 
-	// throws an error if the word cannot overlap 
-	//with the word already there
-	int d= c;
-
+    public void checkbounds(String w, int r, int c, int row) {
 	for (int i=0;i<w.length();i++) {
-	    if (board[r][d] != w.charAt(i) && board[r][d] != '.') {
+	    if (board[r][c] != w.charAt(i) && board[r][c] != '.') {
 		throw new ArrayIndexOutOfBoundsException();
 	    }
-	    d++;
-	}
-
-	for (int i=0;i<w.length();i++) {
-	    board[r][c] = w.charAt(i);
-	    c++;
-	}
-    }	   
-
-    public void addWordHbw(String w,int row, int col){
-	int r = row, c = col;
-
-	// if row or col is out of bounds,
-	// will adjust them for the word to be at the last row or col
-	if (r>=20) {
-	    r = 19;
-	}
-
-	if (c>=30-w.length()) {
-	    c = 30-w.length();
-	}
-
-	// throws an error if the word cannot overlap 
-	//with the word already there
-	int d= c;
-
-	for (int i=w.length()-1;i>=0;i--) {
-	    if (board[r][d] != w.charAt(i) && board[r][d] != '.') {
-		throw new ArrayIndexOutOfBoundsException();
+	    if (r==row) {
+		r++;
+	    } else {
+		c++;
 	    }
-	    d--;
-	}
-
-	for (int i=w.length()-1;i>=0;i--) {
-	    board[r][c] = w.charAt(i);
-	    c--;
 	}
     }
+
+
+    public void addWordH(String w,int row, int col, boolean forward){
+	int r = checkrow(w,row);
+	int c = col;
+	if (forward) {
+	    checkcol(w,col);
+	} else {
+	    checkcol(w,col-w.length());
+	}
+	
+	//checkbounds(w,r,c,c);
+	try {
+	    for (int i=0;i<w.length();i++) {
+		if (board[r][c] == w.charAt(i) || board[r][c] == '.') {
+		    board[r][c] = w.charAt(i);
+		}
+		if (forward) {
+		    c++;
+		} else {
+		    c--;
+		}
+	    }
+	} catch (Exception e) {
+	}
+	    
+    }	   
+
+    public void addWordV(String w, int row, int col, boolean forward) {
+	int r = row;
+	if (forward) {
+	    r = checkrow(w,row);
+	} else {
+	    r = checkrow(w,row-w.length());
+	}
+	int c = checkcol(w,col);
+
+	//checkbounds(w,r,c,r);
+
+	try {
+	    for (int i=0;i<w.length();i++) {
+		if (board[r][c] == w.charAt(i) || board[r][c] == '.') {
+		    board[r][c] = w.charAt(i);
+		}
+		if (forward) {
+		    r++;
+		} else {
+		    r--;
+		}
+	    }
+	} catch (Exception e) {
+	}
+    }
+
+
+    public void addWordD(String w, int row, int col, boolean forward) {
+	int r = checkrow(w,row);
+	int c = checkcol(w,col);
+
+	//checkbounds(w,r,c,r);
+	//checkbounds(w,r,c,c);
+
+	try {
+	    for (int i=0;i<w.length();i++) {
+		if (board[r][c] == w.charAt(i) || board[r][c] == '.') {
+		    board[r][c] = w.charAt(i);
+		}
+		if (forward) {
+		    r--;
+		    c++;
+		} else {
+		    r--;
+		    c--;
+		}
+	    }
+	} catch (Exception e) {
+	}
+    }
+
+    public void addWordDbw(String w, int row, int col, boolean forward) {
+	int r = checkrow(w,row);
+	int c = checkcol(w,col);
+
+	//checkbounds(w,r,c,r);
+	//checkbounds(w,r,c,c);
+
+	try {
+	    for (int i=0;i<w.length();i++) {
+		if (board[r][c] == w.charAt(i) || board[r][c] == '.') {
+		    board[r][c] = w.charAt(i);
+		}
+		if (forward) {
+		    r++;
+		    c--;
+		} else {
+		    r--;
+		    c--;
+		}
+	    }
+	} catch (Exception e) {
+	}
+    }
+
+    public boolean addWord(String w) {
+	Random q = new Random();
+	int a = q.nextInt(4);
+	int r = q.nextInt(board.length);
+	int c = q.nextInt(board[0].length);
+	boolean forward = true;
+	if (q.nextInt(2)==0) {
+	    forward = false;
+	}
+	if (a==0) {
+	    try {
+		addWordH(w,r,c,forward);
+	    } catch (Exception e) {
+		return false;
+	    }
+	}
+	if (a==1) {
+	    try {
+		addWordV(w,r,c,forward);
+	    } catch (Exception e) {
+		return false;
+	    }
+	}
+	if (a==2) {
+	    try {
+		addWordD(w,r,c,forward);
+	    } catch (Exception e) {
+		return false;
+	    }
+	}
+	if (a==3) {
+	    try {
+		addWordDbw(w,r,c,forward);
+	    } catch (Exception e) {
+		return false;
+	    }
+	}
+	return true;
+	}
     
     public static void main(String[] args) {
 	WordSearch w = new WordSearch();
-	System.out.println(w);
-	w.addWordH("hello",3,0);
-	System.out.println(w);
-	w.addWordH("look",3,3);
-	System.out.println(w);
-	w.addWordH("hello",100,500);
-	w.addWordH("hello",5,555);
-	System.out.println(w);
-	w.addWordHbw("hello",7,555);
-	System.out.println(w);
-	w.addWordHbw("boop",5,5);
+	/*
+	w.addWordH("hello",3,0,true);
+	w.addWordH("look",3,7,true);
+	w.addWordH("hello",100,500,true);
+	w.addWordH("hello",5,555,true);
+	w.addWordH("hello",7,555,false);
+	w.addWordH("backwards",17,15,false);
+	w.addWordV("hello",7,14,true);
+	w.addWordV("hello",7,14,false);
+	w.addWordD("hello",6,8,true);
+	w.addWordDbw("hello",15,16,true);
+	w.addWordD("hello",15,2,false);
+	w.addWordDbw("hello",13,25,false);
+	*/
+	w.addWordH("hello",2,6,false);
+	w.addWordV("hello",678,678,false);
+	
+	String[] p = {"this","is","extremely","cool","is","it","not","my","dear","friend"};
+	for (int i=0;i<p.length;i++) {
+	    w.addWord(p[i]);
+	}
+	
+	//System.out.println(w.addWord("coolbeans"));
 	System.out.println(w);
     }
 }
