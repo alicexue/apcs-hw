@@ -32,73 +32,52 @@ public class WordSearch{
 	}
 	return s;
     }
-    
-    public int checkrow(String w, int row) {
-	if (row>=board.length-w.length()) {
-	    row = board.length-w.length();
-	}
-	return row;
-    }
 
-    public int checkcol(String w, int col) {
-	if (col>=board[0].length-w.length()) {
-	    col = board[0].length-w.length();
-	}
-	return col;
-    }
-
-    public void checkbounds(String w, int r, int c, int row) {
-	for (int i=0;i<w.length();i++) {
-	    if (board[r][c] != w.charAt(i) && board[r][c] != '.') {
-		throw new ArrayIndexOutOfBoundsException();
-	    }
-	    if (r==row) {
-		r++;
-	    } else {
-		c++;
-	    }
-	}
-    }
-
-
-    public void addWordH(String w,int row, int col, boolean forward){
-	int r = checkrow(w,row);
-	int c = col;
-	if (forward) {
-	    checkcol(w,col);
-	} else {
-	    checkcol(w,col-w.length());
-	}
-	
-	//checkbounds(w,r,c,c);
+    public boolean checkbounds(String w, int r, int c, int addrow, int addcol) {
+	boolean addword=true;
 	try {
 	    for (int i=0;i<w.length();i++) {
-		if (board[r][c] == w.charAt(i) || board[r][c] == '.') {
-		    board[r][c] = w.charAt(i);
+		if (board[r][c] != w.charAt(i) && board[r][c] != '.') {
+		    addword=false;
 		}
+		r+=addrow;
+		c+=addcol;
+	    }
+	} catch (Exception e) {
+	    addword=false;
+	}
+	return addword;
+    }
+
+ 
+    public void addWordH(String w,int r, int c, boolean forward){
+	boolean addword=true;
+	if (forward) {
+	    addword=checkbounds(w,r,c,0,1);
+	} else {
+	    addword=checkbounds(w,r,c,0,-1);
+	}
+
+	if (addword) {
+	    for (int i=0;i<w.length();i++) {
+		board[r][c] = w.charAt(i);
 		if (forward) {
 		    c++;
 		} else {
 		    c--;
 		}
 	    }
-	} catch (Exception e) {
-	}
-	    
+	} 
     }	   
 
-    public void addWordV(String w, int row, int col, boolean forward) {
-	int r = row;
+    public void addWordV(String w, int r, int c, boolean forward) {
+	boolean addword = true;
 	if (forward) {
-	    r = checkrow(w,row);
+	    addword=checkbounds(w,r,c,1,0);
 	} else {
-	    r = checkrow(w,row-w.length());
+	    addword=checkbounds(w,r,c,-1,0);
 	}
-	int c = checkcol(w,col);
-
-	//checkbounds(w,r,c,r);
-
-	try {
+	if (addword){
 	    for (int i=0;i<w.length();i++) {
 		if (board[r][c] == w.charAt(i) || board[r][c] == '.') {
 		    board[r][c] = w.charAt(i);
@@ -109,19 +88,18 @@ public class WordSearch{
 		    r--;
 		}
 	    }
-	} catch (Exception e) {
 	}
     }
 
 
-    public void addWordD(String w, int row, int col, boolean forward) {
-	int r = checkrow(w,row);
-	int c = checkcol(w,col);
-
-	//checkbounds(w,r,c,r);
-	//checkbounds(w,r,c,c);
-
-	try {
+    public void addWordD(String w, int r, int c, boolean forward) {
+	boolean addword = true;
+	if (forward) {
+	    addword=checkbounds(w,r,c,-1,1);
+	} else {
+	    addword=checkbounds(w,r,c,-1,-1);
+	}  
+	if (addword) {
 	    for (int i=0;i<w.length();i++) {
 		if (board[r][c] == w.charAt(i) || board[r][c] == '.') {
 		    board[r][c] = w.charAt(i);
@@ -134,18 +112,17 @@ public class WordSearch{
 		    c--;
 		}
 	    }
-	} catch (Exception e) {
 	}
     }
 
-    public void addWordDbw(String w, int row, int col, boolean forward) {
-	int r = checkrow(w,row);
-	int c = checkcol(w,col);
-
-	//checkbounds(w,r,c,r);
-	//checkbounds(w,r,c,c);
-
-	try {
+    public void addWordDbw(String w, int r, int c, boolean forward) {
+	boolean addword = true;
+	if (forward) {
+	    addword=checkbounds(w,r,c,1,-1);
+	} else {
+	    addword=checkbounds(w,r,c,-1,-1);
+	}  
+	if (addword) {
 	    for (int i=0;i<w.length();i++) {
 		if (board[r][c] == w.charAt(i) || board[r][c] == '.') {
 		    board[r][c] = w.charAt(i);
@@ -158,7 +135,6 @@ public class WordSearch{
 		    c--;
 		}
 	    }
-	} catch (Exception e) {
 	}
     }
 
@@ -200,11 +176,23 @@ public class WordSearch{
 	    }
 	}
 	return true;
+    }
+
+    public void addLetters(){
+	Random rnd = new Random();
+	char[] letters = {'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'};
+	for (int r=0;r<board.length;r++) {
+	    for (int c=0;c<board[0].length;c++) {
+		if (board[r][c]=='.') {
+		    board[r][c]=letters[rnd.nextInt(26)];
+		}
+	    }
 	}
+    }
     
     public static void main(String[] args) {
 	WordSearch w = new WordSearch();
-	/*
+	
 	w.addWordH("hello",3,0,true);
 	w.addWordH("look",3,7,true);
 	w.addWordH("hello",100,500,true);
@@ -217,16 +205,22 @@ public class WordSearch{
 	w.addWordDbw("hello",15,16,true);
 	w.addWordD("hello",15,2,false);
 	w.addWordDbw("hello",13,25,false);
-	*/
-	w.addWordH("hello",2,6,false);
-	w.addWordV("hello",678,678,false);
+	w.addWord("november");
+	w.addWord("thanksgiving");
+	w.addWord("turkeys");
+	w.addWord("potatoes");
 	
-	String[] p = {"this","is","extremely","cool","is","it","not","my","dear","friend"};
-	for (int i=0;i<p.length;i++) {
-	    w.addWord(p[i]);
+	w.addLetters();
+
+	try {
+	    Scanner sc = new Scanner (new File ("word.txt"));
+	    while (sc.hasNext()) {
+		String s = sc.next();
+		w.addWord(s);
+	    }
+	} catch (Exception e) {
 	}
 	
-	//System.out.println(w.addWord("coolbeans"));
 	System.out.println(w);
     }
 }

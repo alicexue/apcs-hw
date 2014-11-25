@@ -1,0 +1,1 @@
+WordSearch is complete with adding of letters and scanning a text file.

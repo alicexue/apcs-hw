@@ -192,7 +192,7 @@ public class WordSearch{
     
     public static void main(String[] args) {
 	WordSearch w = new WordSearch();
-	
+	/*
 	w.addWordH("hello",3,0,true);
 	w.addWordH("look",3,7,true);
 	w.addWordH("hello",100,500,true);
@@ -209,11 +209,10 @@ public class WordSearch{
 	w.addWord("thanksgiving");
 	w.addWord("turkeys");
 	w.addWord("potatoes");
-	
-	w.addLetters();
+	*/
 
 	try {
-	    Scanner sc = new Scanner (new File ("word.txt"));
+	    Scanner sc = new Scanner (new File ("words.txt"));
 	    while (sc.hasNext()) {
 		String s = sc.next();
 		w.addWord(s);
@@ -221,6 +220,8 @@ public class WordSearch{
 	} catch (Exception e) {
 	}
 	
+	w.addLetters();
+
 	System.out.println(w);
     }
 }
