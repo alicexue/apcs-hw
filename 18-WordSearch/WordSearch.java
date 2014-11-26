@@ -8,6 +8,7 @@ import java.util.*;
 public class WordSearch{
 
     private char[][] board;
+    private Random rnd = new Random();
     
     public WordSearch(int r, int c){
 	board = new char[r][c];
@@ -179,7 +180,6 @@ public class WordSearch{
     }
 
     public void addLetters(){
-	Random rnd = new Random();
 	char[] letters = {'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'};
 	for (int r=0;r<board.length;r++) {
 	    for (int c=0;c<board[0].length;c++) {
@@ -189,6 +189,7 @@ public class WordSearch{
 	    }
 	}
     }
+
     
     public static void main(String[] args) {
 	WordSearch w = new WordSearch();
@@ -214,12 +215,15 @@ public class WordSearch{
 	try {
 	    Scanner sc = new Scanner (new File ("words.txt"));
 	    while (sc.hasNext()) {
-		String s = sc.next();
-		w.addWord(s);
-	    }
+		    String s = sc.next();
+		    w.addWord(s);
+		}
 	} catch (Exception e) {
+	    System.out.println("Can't open file");
 	}
-	
+
+
+		
 	w.addLetters();
 
 	System.out.println(w);

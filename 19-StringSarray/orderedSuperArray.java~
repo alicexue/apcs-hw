@@ -1,0 +1,8 @@
+public class orderedSuperArray extends Sarray {
+    String smallS=data[0];
+    int indexS = 0;
+    for (int i=0;i<data.length;i++) {
+	if (smallS.compareTo(data[i])<0) {
+	    String oldS = data[i];
+	    set(indexS,data[i]);
+	    set(i,smallS);
