@@ -11,6 +11,11 @@ public class Sarray{
 	last=data.length-1;
     }
 
+    public String[] getData() {
+	return data;
+    }
+
+    
     public void showerror() {
 	throw new ArrayIndexOutOfBoundsException();
     }
