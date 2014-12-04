@@ -93,14 +93,29 @@ public class Sarray{
 
     public void isort() {
 	int i;
-	for (int q=0;q<size()-1;q++) {
+	for (int q=0;q<data.length-1;q++) {
 	    if (data[q].compareTo(data[q+1])>0) {
 		String newvalue = data[q];
-		remove(q);
-		for (i=last;i>0&&newvalue.compareTo(data[i-1])<0;i--) {
+		for (i=data.length;i>0&&newvalue.compareTo(data[i-1])>=0;i--) {
 		    data[i]=data[i-1];
 		}
-		data[i+1]=newvalue;
+		data[i]=newvalue;
+	    }
+	}
+    }
+
+    public void ssort() {
+	String min = "";
+	int pos = 0;
+	for (int i=0;i<data.length;i++) {
+	    for (pos=i;pos<data.length;pos++) {
+		min = data[i];
+		if (data[pos].compareTo(min)<0) {
+		    min=data[pos];
+		}
+	    }
+	    if (data[i].compareTo(min)<0) {
+		data[i]=min;
 	    }
 	}
     }
@@ -119,7 +134,7 @@ public class Sarray{
 	System.out.println(a.size());
 	System.out.println(a.add("hello"));
 	System.out.println(a);
-	a.add(3,"hello");
+ 	a.add(3,"hello");
         System.out.println(a);
 	System.out.println(a.size());
 	System.out.println(a.get(4));
@@ -130,6 +145,8 @@ public class Sarray{
 	System.out.println(a);
 	System.out.println(a.size());
 	a.isort();
+	System.out.println(a);
+	a.ssort();
 	System.out.println(a);
 	System.out.println("Testing Errors:");
 	a.add(20,"giving");
