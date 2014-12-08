@@ -1,3 +1,6 @@
+import java.util.*;
+import java.io.*;
+
 public class Sarray{
     private String[] data; // should be object[]
     private int last; // location of last item
@@ -95,7 +98,7 @@ public class Sarray{
 	int q;
 	int index;
 	String newvalue;
-	for (q=0;q<size();q++) {
+	for (q=0;q<size()+1;q++) {
 	    newvalue = data[q];
 	    for (index=q;index>0&&newvalue.compareTo(data[index-1])<=0;index--) {
 		data[index]=data[index-1];
@@ -113,7 +116,7 @@ public class Sarray{
 	for (i=0;i<size();i++) {
 	    pos = size() - 1;
 	    min = data[i];
-	    for (int q=i;q<size();q++) {
+	    for (int q=i;q<size()+1;q++) {
 		if (data[q].compareTo(min)<0) {
 		    min=data[q];
 		    pos=q;
@@ -131,7 +134,7 @@ public class Sarray{
 	int newlength=data.length;
 	String[] temp;
 	for (int i=0;i<size()-1;i++) {
-	    for (int q=0;q<size()-1;q++) {
+	    for (int q=0;q<size();q++) {
 		if (data[q].compareTo(data[q + 1])>0) {
 		    replace1 = data[q];
 		    replace2 = data[q+1];
@@ -142,7 +145,10 @@ public class Sarray{
 	}
     }
 	    
-	    
+
+    public void builtin() {
+	Arrays.sort(data);
+    }
 
     public String toString() {
 	String q = "";
@@ -168,17 +174,20 @@ public class Sarray{
 	System.out.println(a.remove(3));
 	System.out.println(a);
 	System.out.println(a.size());
-	a.isort();
+	//a.isort();
+	//System.out.println(a);
+	//a.ssort();
+	//System.out.println(a);
+	//a.bsort();
+	a.builtin();
 	System.out.println(a);
-	a.ssort();
-	System.out.println(a);
-	a.bsort();
-	System.out.println(a);
+	/*
 	System.out.println("Testing Errors:");
 	a.add(20,"giving");
 	a.get(20);
 	a.set(34,"hi");
 	a.remove(18);
+	*/
     }
 	
 
