@@ -92,57 +92,53 @@ public class Sarray{
     }
 
     public void isort() {
-	int i;
+	int q;
+	int index;
 	String newvalue;
-	for (int q=0;q<data.length;q++) {
+	for (q=0;q<size();q++) {
 	    newvalue = data[q];
-	    for (i=data.length;i>0&&newvalue.compareTo(data[i-1])>=0;i--) {
-		data[i]=data[i-1];
+	    for (index=q;index>0&&newvalue.compareTo(data[index-1])<=0;index--) {
+		data[index]=data[index-1];
 	    }
-	    data[i]=newvalue;
+	    data[index]=newvalue;
 	}
     }
     
 
 
     public void ssort() {
-	String min=data[0], replace;
-	int i=0;
-	int pos=0;
-	for (i=0;i<data.length;i++) {
-	    if (data[i].compareTo(min)<0) {
-		min=data[i];
-		i=pos;
+	String min, replace1, replace2;
+	int i;
+	int pos;
+	for (i=0;i<size();i++) {
+	    pos = size() - 1;
+	    min = data[i];
+	    for (int q=i;q<size();q++) {
+		if (data[q].compareTo(min)<0) {
+		    min=data[q];
+		    pos=q;
+		}
 	    }
-	}
-	i=0;
-	for (i=0; i<data.length;i++) {
-	    if (data[i].compareTo(min)<0) {
-		data[pos]=data[i];
-		data[i]=min;
-	    }
-	}
-    }
-
-    public String[] bsortSwap(String[] a) {
-	String smaller="", larger="";
-	for (int i=0;i<a.length-1;i++) {
-	    if (a[i].compareTo(a[i+1])>=0) {
-		smaller=a[i+1];
-		larger=a[i];
-		a[i]=smaller;
-		a[i+1]=larger;
-	    }
+	    replace1 = data[i];
+	    replace2 = min;
+	    data[pos] = replace1;
+	    data[i] = replace2;
 	}
     }
 
     public void bsort() {
-	// write temp part to splice array
+	String replace1, replace2;
 	int newlength=data.length;
 	String[] temp;
-	for (int i=0;i<newlength;i++) {
-	    //data[0,newlength-1]=bsortSwap(data[0,newlength-1]);
-	    newlength--;
+	for (int i=0;i<size()-1;i++) {
+	    for (int q=0;q<size()-1;q++) {
+		if (data[q].compareTo(data[q + 1])>0) {
+		    replace1 = data[q];
+		    replace2 = data[q+1];
+		    data[q] = replace2;
+		    data[q+1] = replace1;
+		}
+	    }
 	}
     }
 	    
@@ -172,8 +168,8 @@ public class Sarray{
 	System.out.println(a.remove(3));
 	System.out.println(a);
 	System.out.println(a.size());
-	//a.isort();
-	//System.out.println(a);
+	a.isort();
+	System.out.println(a);
 	a.ssort();
 	System.out.println(a);
 	a.bsort();
