@@ -85,6 +85,7 @@ public class Interval implements Comparable {
 	System.out.println(Arrays.toString(sa));
 	Arrays.sort(sa);
 	System.out.println(Arrays.toString(sa));
-	*/ 
+	*/
+
     } 
 }
