@@ -1,4 +1,4 @@
-public class Monster extends Basechar{
+public class Monster extends Basechar implements Comparable{
     int healthboost=(int)Math.ceil(Math.random()*400);
     public Monster (String n) {
 	super(n);
