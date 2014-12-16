@@ -26,6 +26,7 @@ public class Searching {
 	    b[i]=a[i];
 	}
 	b[b.length-1]=item;
+	a=b;
     }
 
     public void sort() {
@@ -44,25 +45,30 @@ public class Searching {
 
     public Comparable bsearch(Comparable item) {
 	sort();
-	if (a[a.length/2].compareTo(item)<0) {
-	    for (int i=0;i<a.length;i++) {
+	int mid = a.length/2;
+	int count = a.length/2;
+	int low;
+	while (count>0) {
+	    if (a[mid].compareTo(item)<0) {
+		low = 0;
+	    } else {
+		low = mid;
+	    }
+	    for (int i=low;i<a.length;i++) {
 		if (a[i].compareTo(item)==0) {
 		    return item;
 		}
 	    }
-	} else {
-	    for (int i=a.length;i<a.length;i++) {
-		if (a[i].compareTo(item)==0) {
-		    return item;
-		}
-	    }
+	count++;
 	}
 	return null;
     }
 
     public Comparable rbsearch(Comparable item, int low, int high) {
 	int mid = (low+high)/2;
-	if (a[mid].compareTo(high)>0) {
+	if (item.compareTo(a[mid])==0) {
+	    return item;
+	} else if (item.compareTo(a[high])>0) {
 	    return null;
 	} else {
 	    if (a[mid].compareTo(item)>0) {
@@ -75,7 +81,7 @@ public class Searching {
 
     public Comparable rbsearch(Comparable item) {
 	sort();
-	return rbsearch(item,0,a.length);
+	return rbsearch(item,0,a.length-1);
     }
 
     public static void main (String[] args) {
@@ -84,11 +90,12 @@ public class Searching {
 	for (int i=0;i<10;i++) {
 	    a.additem(rnd.nextInt(100));
 	}
-	a.sort();
 	a.additem(23);
-	System.out.print(a.lsearch(32));
+	a.sort();
+	System.out.println(a.toString());
+	System.out.println(a.lsearch(23));
 	System.out.println(a.bsearch(23));
-	System.out.println(a.rbsearch(2));
+	System.out.println(a.rbsearch(23));
 	
     }
 	  
