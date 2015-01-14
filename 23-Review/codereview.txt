@@ -1,0 +1,11 @@
+Code Review for Rong Yu and Tommy Li's project
+Repository I am reviewing: https://github.com/tli123/APCSFinalProject
+Shop.java
+7-12: there should be more comments to specify what the arrays are of - it's confusing at the moment.
+34: the if statement at is unneccessary because you have the if and else statements below it for Choice.equals("one") and Choice.equals("two").
+Perhaps a lot of this code can be condensed by creating different arrays for weaponStats, weaponName, etc. so that you can set them according to their corresponding position in the array. For example, if the Choice is "wooden staff", and it is at position 0 in the array witems, you would set weaponStats to the value in a separate array at position 3. 
+
+SaveLoad.java
+96: specify what the boolean LS means and what the parameter num is.
+101: this while loop is infinite - it never returns false or has a break in the loop.
+Add in more comments to specify what each method does.
